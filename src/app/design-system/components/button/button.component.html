@@ -1,0 +1,6 @@
+<button [type]="type" [ngClass]="[
+    buttonClass,
+    disabled ? 'disabled' : ''
+  ]" [disabled]="disabled" (click)="onClick($event)">
+  <ng-content></ng-content>
+</button>
