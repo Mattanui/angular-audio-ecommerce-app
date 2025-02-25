@@ -1,0 +1,91 @@
+// Design System - Buttons
+
+@import "variables";
+
+// Styles de base des boutons
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-family-base;
+  font-weight: $font-weight-bold;
+  font-size: 0.8125rem; // 13px
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: none;
+  cursor: pointer;
+  transition: all $transition-normal;
+  padding: 1rem 2rem;
+  min-width: 160px;
+  height: 48px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Bouton 1 - Primaire (fond orange)
+.btn-primary {
+  @extend .btn;
+  background-color: $primary;
+  color: $white;
+
+  &:hover,
+  &:focus {
+    background-color: $primary-light;
+  }
+}
+
+// Bouton 2 - Secondaire (souligné en noir)
+.btn-secondary {
+  @extend .btn;
+  background-color: transparent;
+  color: $black;
+  border: 1px solid $black;
+
+  &:hover,
+  &:focus {
+    background-color: $black;
+    color: $white;
+  }
+}
+
+// Bouton 3 - Texte avec flèche (Boutique)
+.btn-text {
+  @extend .btn;
+  background-color: transparent;
+  color: $black;
+  padding: 0;
+  min-width: auto;
+  height: auto;
+  position: relative;
+
+  &::after {
+    content: ">";
+    margin-left: 0.5rem;
+    font-size: 1rem;
+    transition: transform $transition-normal;
+  }
+
+  &:hover,
+  &:focus {
+    color: $primary;
+
+    &::after {
+      transform: translateX(5px);
+    }
+  }
+}
+
+// Styles supplémentaires pour la réactivité
+@media (max-width: $breakpoint-sm) {
+  .btn {
+    min-width: 120px;
+    padding: 0.75rem 1.5rem;
+  }
+}
