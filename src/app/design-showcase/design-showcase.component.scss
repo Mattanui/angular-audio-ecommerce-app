@@ -1,0 +1,204 @@
+// Variables intégrées directement pour contourner les problèmes d'importation
+// Couleurs principales
+$primary: #d87d4a;
+$black: #101010;
+$white: #f1f1f1;
+$light-gray: #fafafa;
+$primary-light: #fbaf85;
+$pure-white: #ffffff;
+$pure-black: #000000;
+
+// Espacements
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+$spacing-xl: 3rem;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Border radius
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+
+// Transitions
+$transition-fast: 0.2s ease;
+$transition-normal: 0.3s ease;
+$transition-slow: 0.5s ease;
+
+// Typography
+$font-family-base: "Manrope", sans-serif;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+// Mixins simplifiés
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (max-width: $breakpoint-sm) {
+      @content;
+    }
+  } @else if $breakpoint == md {
+    @media (max-width: $breakpoint-md) {
+      @content;
+    }
+  } @else if $breakpoint == lg {
+    @media (max-width: $breakpoint-lg) {
+      @content;
+    }
+  } @else if $breakpoint == xl {
+    @media (max-width: $breakpoint-xl) {
+      @content;
+    }
+  }
+}
+
+.container {
+  padding: $spacing-lg $spacing-md;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.showcase-section {
+  margin-bottom: $spacing-xl * 2;
+  border-bottom: 1px solid rgba($black, 0.1);
+  padding-bottom: $spacing-xl;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  h2 {
+    margin-bottom: $spacing-lg;
+  }
+}
+
+// Couleurs
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: $spacing-md;
+}
+
+.color-item {
+  margin-bottom: $spacing-md;
+}
+
+.color-swatch {
+  width: 100%;
+  height: 120px;
+  border-radius: $border-radius-md;
+  margin-bottom: $spacing-sm;
+
+  &.primary {
+    background-color: $primary;
+  }
+
+  &.black {
+    background-color: $black;
+  }
+
+  &.white {
+    background-color: $white;
+    border: 1px solid rgba($black, 0.1);
+  }
+
+  &.light-gray {
+    background-color: $light-gray;
+    border: 1px solid rgba($black, 0.1);
+  }
+
+  &.primary-light {
+    background-color: $primary-light;
+  }
+}
+
+.color-info {
+  .color-name {
+    font-weight: $font-weight-bold;
+    margin-bottom: 4px;
+  }
+
+  .color-hex {
+    color: rgba($black, 0.6);
+    font-family: monospace;
+  }
+}
+
+// Typographie
+.typography-item {
+  margin-bottom: $spacing-lg;
+
+  .typography-label {
+    font-size: 14px;
+    color: rgba($black, 0.6);
+    margin-bottom: $spacing-xs;
+  }
+}
+
+// Boutons
+.buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: $spacing-lg;
+}
+
+.button-item {
+  margin-bottom: $spacing-md;
+
+  .button-label {
+    font-size: 14px;
+    color: rgba($black, 0.6);
+    margin-bottom: $spacing-sm;
+  }
+}
+
+// Formulaires
+.demo-form {
+  background-color: $light-gray;
+  padding: $spacing-lg;
+  border-radius: $border-radius-md;
+  max-width: 800px;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: $spacing-md;
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
+}
+
+.form-col {
+  flex: 1;
+  min-width: 250px;
+  padding-right: $spacing-md;
+
+  &:last-child {
+    padding-right: 0;
+  }
+
+  @media (max-width: 576px) {
+    padding-right: 0;
+    margin-bottom: $spacing-md;
+  }
+}
+
+.form-label-demo {
+  font-size: 14px;
+  color: rgba($black, 0.6);
+  margin-bottom: $spacing-sm;
+}
+
+.radio-group-demo {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}

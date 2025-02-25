@@ -7,6 +7,15 @@
 @import "buttons";
 @import "forms";
 
+// * Si l'import ne fonctionne pas, essayez les chemins absolus :
+/*
+@import 'src/styles/variables';
+@import 'src/styles/mixins';
+@import 'src/styles/typography';
+@import 'src/styles/buttons';
+@import 'src/styles/forms';
+*/
+
 // Styles globaux additionnels
 body {
   background-color: $light-gray;

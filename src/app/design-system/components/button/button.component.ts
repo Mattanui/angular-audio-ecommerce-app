@@ -1,10 +1,17 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 
 @Component({
   selector: 'app-button',
   standalone: false,
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ButtonComponent {
   @Input() variant: 'primary' | 'secondary' | 'text' = 'primary';
@@ -17,6 +24,7 @@ export class ButtonComponent {
   }
 
   onClick(event: Event): void {
+    console.log('Bouton cliqué avec la classe:', this.buttonClass);
     this.buttonClick.emit(event);
   }
 }
