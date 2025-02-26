@@ -1,23 +1,29 @@
-import {
-  Component,
-  Input,
-  Self,
-  Optional,
-  OnInit,
-  forwardRef,
-} from '@angular/core';
+import { Component, Input, ViewEncapsulation, forwardRef } from '@angular/core';
 import {
   ControlValueAccessor,
-  FormControl,
-  NgControl,
   NG_VALUE_ACCESSOR,
+  FormControl,
 } from '@angular/forms';
 
 @Component({
   selector: 'app-text-field',
   standalone: false,
-  templateUrl: './text-field.component.html',
+  template: `
+    <div class="form-group" [class.error]="hasError">
+      <label *ngIf="label" class="form-label">{{ label }}</label>
+      <input
+        [type]="type"
+        class="form-control"
+        [placeholder]="placeholder"
+        [value]="value"
+        (input)="onInput($event)"
+        (blur)="onBlur()"
+      />
+      <div *ngIf="hasError" class="error-message">{{ errorMessage }}</div>
+    </div>
+  `,
   styleUrls: ['./text-field.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -26,62 +32,57 @@ import {
     },
   ],
 })
-export class TextFieldComponent implements OnInit, ControlValueAccessor {
-  @Input() label: string = '';
-  @Input() placeholder: string = '';
-  @Input() type: 'text' | 'email' | 'password' | 'number' = 'text';
-  @Input() errorMessage: string = '';
+export class TextFieldComponent implements ControlValueAccessor {
+  @Input() label = '';
+  @Input() placeholder = '';
+  @Input() type = 'text';
+  @Input() errorMessage = '';
+  @Input() set formControl(control: FormControl) {
+    if (control) {
+      this._formControl = control;
 
-  id: string = `text-field-${Math.random().toString(36).substring(2, 11)}`;
-  errorId: string = `${this.id}-error`;
-  control: FormControl = new FormControl();
-
-  private onChange: any = () => {};
-  private onTouched: any = () => {};
-
-  constructor(@Optional() @Self() public ngControl: NgControl) {
-    if (this.ngControl) {
-      this.ngControl.valueAccessor = this;
+      this._formControl.valueChanges.subscribe(() => {
+        this.hasError = this._formControl.invalid && this._formControl.touched;
+        if (this._formControl.errors?.['required']) {
+          this.errorMessage = 'Ce champ est requis';
+        }
+      });
     }
   }
 
-  ngOnInit(): void {
-    if (this.ngControl && this.ngControl.control) {
-      // Synchroniser le FormControl du composant avec celui fourni par NgControl
-      this.control = this.ngControl.control as FormControl;
-    }
+  get formControl(): FormControl {
+    return this._formControl;
   }
 
-  get isInvalid(): boolean {
-    return (
-      this.control &&
-      this.control.invalid &&
-      (this.control.touched || this.control.dirty)
-    );
-  }
+  private _formControl!: FormControl;
+  value = '';
+  hasError = false;
+  touched = false;
+  onChange = (_: any) => {};
+  onTouch = () => {};
 
-  onBlur(): void {
-    this.control.markAsTouched();
-    this.onTouched();
-  }
-
-  // Implémentation des méthodes de ControlValueAccessor
   writeValue(value: any): void {
-    if (value !== undefined) {
-      this.control.setValue(value, { emitEvent: false });
-    }
+    this.value = value || '';
   }
 
   registerOnChange(fn: any): void {
     this.onChange = fn;
-    this.control.valueChanges.subscribe(fn);
   }
 
   registerOnTouched(fn: any): void {
-    this.onTouched = fn;
+    this.onTouch = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
-    isDisabled ? this.control.disable() : this.control.enable();
+  onInput(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    this.value = value;
+    this.onChange(value);
+  }
+
+  onBlur(): void {
+    if (!this.touched) {
+      this.touched = true;
+      this.onTouch();
+    }
   }
 }

@@ -1,2 +1,5 @@
-// Le style est déjà défini dans _forms.scss,
-// ce fichier est vide car nous utilisons les styles globaux
+// Styles spécifiques au composant text-field
+:host {
+  display: block;
+  width: 100%;
+}

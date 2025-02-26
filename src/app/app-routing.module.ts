@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DesignShowcaseComponent } from './design-showcase/design-showcase.component';
 
 const routes: Routes = [
-  { path: 'design-system', component: DesignShowcaseComponent },
-
+  {
+    path: 'design-system',
+    loadChildren: () =>
+      import('./design-showcase/design-showcase.module').then(
+        (m) => m.DesignShowcaseModule
+      ),
+  },
   {
     path: '',
-    redirectTo: 'design-system',
+    redirectTo: '',
     pathMatch: 'full',
   },
 ];

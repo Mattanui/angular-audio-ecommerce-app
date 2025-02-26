@@ -20,7 +20,6 @@ import { NumberInputComponent } from './components/number-input/number-input.com
     TextFieldComponent,
     RadioButtonComponent,
     NumberInputComponent,
-    // ? Exporter également les modules de formulaires pour les utiliser dans les composants parents
     FormsModule,
     ReactiveFormsModule,
   ],

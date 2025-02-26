@@ -1,23 +1,22 @@
 // Mixins SCSS réutilisables
-
-@import "variables";
+@use "./variables" as vars;
 
 // Mixin pour les media queries
 @mixin respond-to($breakpoint) {
   @if $breakpoint == sm {
-    @media (max-width: $breakpoint-sm) {
+    @media (max-width: vars.$breakpoint-sm) {
       @content;
     }
   } @else if $breakpoint == md {
-    @media (max-width: $breakpoint-md) {
+    @media (max-width: vars.$breakpoint-md) {
       @content;
     }
   } @else if $breakpoint == lg {
-    @media (max-width: $breakpoint-lg) {
+    @media (max-width: vars.$breakpoint-lg) {
       @content;
     }
   } @else if $breakpoint == xl {
-    @media (max-width: $breakpoint-xl) {
+    @media (max-width: vars.$breakpoint-xl) {
       @content;
     }
   }
@@ -35,7 +34,7 @@
 // Mixin pour les transitions
 @mixin transition(
   $property: all,
-  $duration: $transition-normal,
+  $duration: vars.$transition-normal,
   $timing: ease
 ) {
   transition: $property $duration $timing;
@@ -82,7 +81,7 @@
 }
 
 // Mixin pour les grilles responsive
-@mixin grid($columns: 1, $gap: $spacing-md) {
+@mixin grid($columns: 1, $gap: vars.$spacing-md) {
   display: grid;
   grid-template-columns: repeat($columns, 1fr);
   gap: $gap;
@@ -97,7 +96,7 @@
 }
 
 // Mixin pour les overlay
-@mixin overlay($color: rgba($black, 0.5), $z-index: 1) {
+@mixin overlay($color: rgba(vars.$black, 0.5), $z-index: 1) {
   position: absolute;
   top: 0;
   left: 0;

@@ -1,2 +1,4 @@
-// Le style est déjà défini dans _forms.scss,
-// ce fichier est vide car nous utilisons les styles globaux
+:host {
+  display: block;
+  margin-bottom: 0.5rem;
+}

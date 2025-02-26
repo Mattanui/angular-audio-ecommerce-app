@@ -1,15 +1,16 @@
 // Design System - Form Elements
 
-@import "variables";
-@import "typography";
+@use "./variables" as vars;
+@use "./mixins" as mix;
+@use "./typography" as type;
 
 // Style de l'étiquette
 .form-label {
   display: block;
   font-size: 0.75rem; // 12px
-  font-weight: $font-weight-bold;
+  font-weight: type.$font-weight-bold;
   margin-bottom: 0.5rem;
-  color: $black;
+  color: vars.$black;
 }
 
 // Groupe de formulaire
@@ -40,21 +41,21 @@
   width: 100%;
   height: 56px;
   padding: 0 1.5rem;
-  font-family: $font-family-base;
+  font-family: type.$font-family-base;
   font-size: 0.875rem;
-  color: $black;
+  color: vars.$black;
   background-color: transparent;
   border: 1px solid #cfcfcf; // Gris clair pour les bordures
-  border-radius: $border-radius-sm;
-  transition: all $transition-normal;
+  border-radius: vars.$border-radius-sm;
+  transition: all vars.$transition-normal;
 
   &::placeholder {
-    color: rgba($black, 0.4);
+    color: rgba(vars.$black, 0.4);
   }
 
   &:focus {
     outline: none;
-    border-color: $primary;
+    border-color: vars.$primary;
   }
 
   &.error {
@@ -73,16 +74,16 @@
   position: relative;
   padding: 1rem 1.5rem;
   border: 1px solid #cfcfcf;
-  border-radius: $border-radius-sm;
+  border-radius: vars.$border-radius-sm;
   cursor: pointer;
-  transition: all $transition-normal;
+  transition: all vars.$transition-normal;
 
   &:hover {
-    border-color: $primary;
+    border-color: vars.$primary;
   }
 
   &.active {
-    border-color: $primary;
+    border-color: vars.$primary;
   }
 
   .radio-input {
@@ -116,9 +117,9 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background-color: $primary;
+      background-color: vars.$primary;
       opacity: 0;
-      transition: opacity $transition-normal;
+      transition: opacity vars.$transition-normal;
     }
   }
 
@@ -131,7 +132,7 @@
 .number-input {
   display: flex;
   align-items: center;
-  background-color: $light-gray;
+  background-color: vars.$light-gray;
   max-width: 120px;
   height: 48px;
 
@@ -145,11 +146,11 @@
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: rgba($black, 0.5);
-    transition: color $transition-normal;
+    color: rgba(vars.$black, 0.5);
+    transition: color vars.$transition-normal;
 
     &:hover {
-      color: $primary;
+      color: vars.$primary;
     }
 
     &:focus {
@@ -165,8 +166,8 @@
   .number-value {
     flex: 1;
     text-align: center;
-    font-weight: $font-weight-bold;
-    color: $black;
+    font-weight: type.$font-weight-bold;
+    color: vars.$black;
   }
 
   input[type="number"] {
@@ -177,8 +178,8 @@
     width: 40px;
     border: none;
     background-color: transparent;
-    font-family: $font-family-base;
-    font-weight: $font-weight-bold;
+    font-family: type.$font-family-base;
+    font-weight: type.$font-weight-bold;
 
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button {

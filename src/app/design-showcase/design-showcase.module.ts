@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { DesignSystemModule } from '../design-system/design-system.module';
 import { DesignShowcaseComponent } from './design-showcase.component';
@@ -18,6 +18,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     DesignSystemModule,
     RouterModule.forChild(routes),
   ],

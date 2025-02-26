@@ -8,6 +8,7 @@ import {
 
 @Component({
   selector: 'app-design-showcase',
+  standalone: false,
   templateUrl: './design-showcase.component.html',
   styleUrls: ['./design-showcase.component.scss'],
 })
@@ -35,57 +36,45 @@ export class DesignShowcaseComponent implements OnInit {
     Validators.minLength(8),
   ]);
 
-  constructor(private fb: FormBuilder) {
-    console.log('DesignShowcaseComponent constructeur appelé');
-  }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    console.log('DesignShowcaseComponent ngOnInit appelé');
-
     // Initialiser le formulaire de démonstration
     this.demoForm = this.fb.group({
       name: this.nameControl,
       email: this.emailControl,
       password: this.passwordControl,
     });
-
-    console.log('Formulaire initialisé:', this.demoForm);
   }
 
   // Méthodes pour démontrer les boutons
-  onPrimaryButtonClick(event: any): void {
-    console.log('Bouton primaire cliqué', event);
+  onPrimaryButtonClick(event: Event): void {
     this.primaryButtonClicked = true;
     setTimeout(() => (this.primaryButtonClicked = false), 1000);
   }
 
-  onSecondaryButtonClick(event: any): void {
-    console.log('Bouton secondaire cliqué', event);
+  onSecondaryButtonClick(event: Event): void {
     this.secondaryButtonClicked = true;
     setTimeout(() => (this.secondaryButtonClicked = false), 1000);
   }
 
-  onTextButtonClick(event: any): void {
-    console.log('Bouton texte cliqué', event);
+  onTextButtonClick(event: Event): void {
     this.textButtonClicked = true;
     setTimeout(() => (this.textButtonClicked = false), 1000);
   }
 
   // Méthode pour démontrer les radio buttons
   onPaymentMethodChange(value: string): void {
-    console.log('Méthode de paiement changée:', value);
     this.selectedPaymentMethod = value;
   }
 
   // Méthode pour démontrer les number inputs
   onQuantityChange(value: number): void {
-    console.log('Quantité changée:', value);
     this.quantity = value;
   }
 
   // Méthode pour soumettre le formulaire de démonstration
   onSubmit(): void {
-    console.log('Formulaire soumis, état:', this.demoForm.valid);
     if (this.demoForm.valid) {
       console.log('Formulaire valide', this.demoForm.value);
     } else {

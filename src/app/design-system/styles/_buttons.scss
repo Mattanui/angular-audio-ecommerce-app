@@ -1,21 +1,22 @@
 // Design System - Buttons
 
-@import "variables";
-@import "typography";
+@use "./variables" as vars;
+@use "./mixins" as mix;
+@use "./typography" as type;
 
 // Styles de base des boutons
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: $font-family-base;
-  font-weight: $font-weight-bold;
+  font-family: type.$font-family-base;
+  font-weight: type.$font-weight-bold;
   font-size: 0.8125rem; // 13px
   text-transform: uppercase;
   letter-spacing: 1px;
   border: none;
   cursor: pointer;
-  transition: all $transition-normal;
+  transition: all vars.$transition-normal;
   padding: 1rem 2rem;
   min-width: 160px;
   height: 48px;
@@ -33,12 +34,12 @@
 // Bouton 1 - Primaire (fond orange)
 .btn-primary {
   @extend .btn;
-  background-color: $primary;
-  color: $white;
+  background-color: vars.$primary;
+  color: vars.$white;
 
   &:hover,
   &:focus {
-    background-color: $primary-light;
+    background-color: vars.$primary-light;
   }
 }
 
@@ -46,13 +47,13 @@
 .btn-secondary {
   @extend .btn;
   background-color: transparent;
-  color: $black;
-  border: 1px solid $black;
+  color: vars.$black;
+  border: 1px solid vars.$black;
 
   &:hover,
   &:focus {
-    background-color: $black;
-    color: $white;
+    background-color: vars.$black;
+    color: vars.$white;
   }
 }
 
@@ -60,7 +61,7 @@
 .btn-text {
   @extend .btn;
   background-color: transparent;
-  color: $black;
+  color: vars.$black;
   padding: 0;
   min-width: auto;
   height: auto;
@@ -70,12 +71,12 @@
     content: ">";
     margin-left: 0.5rem;
     font-size: 1rem;
-    transition: transform $transition-normal;
+    transition: transform vars.$transition-normal;
   }
 
   &:hover,
   &:focus {
-    color: $primary;
+    color: vars.$primary;
 
     &::after {
       transform: translateX(5px);
@@ -84,7 +85,7 @@
 }
 
 // Styles supplémentaires pour la réactivité
-@media (max-width: $breakpoint-sm) {
+@media (max-width: vars.$breakpoint-sm) {
   .btn {
     min-width: 120px;
     padding: 0.75rem 1.5rem;
