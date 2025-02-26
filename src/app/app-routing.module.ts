@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
+  { path: 'home', component: HomeComponent },
+
   {
     path: 'design-system',
     loadChildren: () =>
@@ -9,6 +12,7 @@ const routes: Routes = [
         (m) => m.DesignShowcaseModule
       ),
   },
+
   {
     path: '',
     redirectTo: '',

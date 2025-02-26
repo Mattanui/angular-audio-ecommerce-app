@@ -1,0 +1,8 @@
+<menu>
+    <ul>
+        <li *ngFor="let route of navLinks">
+            <a class="subtitle"  routerLink="[route.link]" routerLinkActive="router-link-active" [routerLinkActiveOptions]="{exact: route.link === '/'}">{{route.label}}</a>
+        </li>
+    </ul>
+    <hr>
+</menu>
