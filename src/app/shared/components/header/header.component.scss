@@ -1,0 +1,93 @@
+@use "../../../../app/design-system/styles/variables" as vars;
+@use "../../../../app/design-system/styles/mixins" as mix;
+
+.header {
+  background-color: vars.$black;
+  color: vars.$white;
+  padding: 2rem 0;
+  position: relative;
+
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    position: relative;
+
+    &::before {
+      content: "";
+      height: 1px;
+      width: 100%;
+      max-width: 1160px;
+      background-color: vars.$white;
+      position: absolute;
+      top: 72px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      opacity: 0.3;
+
+      @include mix.respond-to(md) {
+        width: 96%;
+      }
+      @include mix.respond-to(sm) {
+        width: 100%;
+      }
+    }
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .mobile-menu {
+      display: none; // Caché par défaut sur desktop
+
+      @include mix.respond-to(md) {
+        display: block; // Visible sur tablette/mobile
+        margin-right: 1rem;
+      }
+    }
+
+    app-navbar {
+      @include mix.respond-to(md) {
+        display: none; // Caché sur mobile par défaut
+
+        &.mobile-visible {
+          display: block;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 55%;
+          height: 100vh;
+          background-color: vars.$black;
+          z-index: 90;
+          padding: 6rem 2rem 2rem;
+          overflow-y: auto;
+        }
+      }
+    }
+  }
+
+  // Overlay pour fermer le menu mobile
+  .mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 80;
+
+    &.active {
+      display: block;
+    }
+  }
+}
+
+// Style pour le body quand le menu est ouvert
+:host-context(body.menu-open) {
+  overflow: hidden;
+}
