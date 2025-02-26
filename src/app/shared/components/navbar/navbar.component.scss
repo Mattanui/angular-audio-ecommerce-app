@@ -1,0 +1,41 @@
+@use "../../../design-system/styles/variables" as vars;
+@use "../../../design-system/styles/mixins" as mix;
+@use "../../../design-system/styles/typography" as typo;
+@use "../../../design-system/styles/forms" as forms;
+
+menu {
+    width: 100%;
+    margin-top: vars.$spacing-lg;
+    margin-bottom: vars.$spacing-lg;
+
+    ul {
+        display: flex;           // Affiche les éléments en ligne
+        justify-content: center; // Centre horizontalement les <li>
+        list-style: none;        // Supprime les puces par défaut
+        padding: 10px 0;         // Ajustez l'espacement vertical selon vos besoins
+
+            li {
+                margin: 0 20px;        // Espacement entre chaque élément
+            }
+                a{
+                    text-decoration: none;
+                    color: vars.$white;
+
+                    &:hover {
+                        color: vars.$primary;
+                    }
+                }
+
+    }
+
+    hr {
+        border: none;
+        margin: 20px auto;            // Espacement avant et après la ligne
+        width: 80%;
+        margin-top: vars.$spacing-lg;
+        background: vars.$light-gray;
+        height: 3px;
+        border-radius: 2px;
+        box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
+    }
+}
