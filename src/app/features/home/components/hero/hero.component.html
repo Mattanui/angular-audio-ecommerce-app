@@ -5,7 +5,9 @@
         <p class="overline">NEW PRODUCT</p>
         <h1>{{ productTitle }}</h1>
         <p class="description">{{ productDescription }}</p>
-        <button class="btn-primary" (click)="onSeeProduct()">SEE PRODUCT</button>
+        <app-button variant="primary" (buttonClick)="onSeeProduct()">
+          SEE PRODUCT
+        </app-button>
       </div>
       <div class="hero-image">
         <!-- L'image est en background dans le CSS -->
