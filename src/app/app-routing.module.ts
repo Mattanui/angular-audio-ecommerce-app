@@ -3,6 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: '',
+    loadChildren: () =>
+      import('./features/home/home.module').then((m) => m.HomeModule),
+  },
+  {
     path: 'design-system',
     loadChildren: () =>
       import('./design-showcase/design-showcase.module').then(
@@ -10,7 +15,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: '',
+    path: '**',
     redirectTo: '',
     pathMatch: 'full',
   },
