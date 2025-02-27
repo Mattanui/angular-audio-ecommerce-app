@@ -11,7 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { DesignSystemModule } from './design-system/design-system.module';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     RouterModule,
@@ -21,7 +21,7 @@ import { DesignSystemModule } from './design-system/design-system.module';
     ReactiveFormsModule,
     CoreModule,
     SharedModule,
-    DesignSystemModule
+    DesignSystemModule,
   ],
   providers: [provideHttpClient(withFetch())],
   bootstrap: [AppComponent],
