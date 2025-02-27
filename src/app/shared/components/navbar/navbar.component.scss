@@ -1,41 +1,64 @@
-@use "../../../design-system/styles/variables" as vars;
-@use "../../../design-system/styles/mixins" as mix;
-@use "../../../design-system/styles/typography" as typo;
-@use "../../../design-system/styles/forms" as forms;
+@use "../../../../app/design-system/styles/variables" as vars;
+@use "../../../../app/design-system/styles/mixins" as mix;
+@use "../../../../app/design-system/styles/typography" as typo;
 
-menu {
-    width: 100%;
-    margin-top: vars.$spacing-lg;
-    margin-bottom: vars.$spacing-lg;
+.navbar {
+  .nav-list {
+    display: flex;
+    list-style: none;
+    gap: vars.$spacing-lg;
+    padding: 0;
+    margin: 0;
 
-    ul {
-        display: flex;           // Affiche les éléments en ligne
-        justify-content: center; // Centre horizontalement les <li>
-        list-style: none;        // Supprime les puces par défaut
-        padding: 10px 0;         // Ajustez l'espacement vertical selon vos besoins
-
-            li {
-                margin: 0 20px;        // Espacement entre chaque élément
-            }
-                a{
-                    text-decoration: none;
-                    color: vars.$white;
-
-                    &:hover {
-                        color: vars.$primary;
-                    }
-                }
-
+    @include mix.respond-to(md) {
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: vars.$spacing-md;
     }
+  }
 
-    hr {
-        border: none;
-        margin: 20px auto;            // Espacement avant et après la ligne
-        width: 80%;
-        margin-top: vars.$spacing-lg;
-        background: vars.$light-gray;
-        height: 3px;
-        border-radius: 2px;
-        box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
+  .nav-item {
+    a {
+      color: vars.$white;
+      text-decoration: none;
+      font-size: 0.8125rem;
+      font-weight: typo.$font-weight-normal;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color vars.$transition-normal;
+
+      &:hover,
+      &.active {
+        color: vars.$primary;
+        font-weight: typo.$font-weight-bold;
+      }
+
+      @include mix.respond-to(md) {
+        font-size: typo.$base-font-size;
+      }
+
+      @include mix.respond-to(sm) {
+        font-size: typo.$h6-font-size;
+      }
     }
+  }
+}
+
+// Styles spécifiques pour le footer
+:host-context(app-footer) {
+  .navbar {
+    .nav-list {
+      @include mix.respond-to(md) {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: vars.$spacing-sm;
+      }
+
+      @include mix.respond-to(sm) {
+        flex-direction: column;
+        align-items: center;
+        gap: vars.$spacing-sm;
+      }
+    }
+  }
 }

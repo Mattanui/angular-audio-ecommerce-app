@@ -8,6 +8,10 @@ body {
   background-color: ds.$light-gray;
 }
 
+body.menu-open {
+  overflow: hidden;
+}
+
 // Container
 .container {
   width: 100%;

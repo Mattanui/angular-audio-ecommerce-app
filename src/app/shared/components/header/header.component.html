@@ -1,0 +1,13 @@
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <app-mobile-menu (menuToggle)="onMenuToggle($event)" class="mobile-menu"></app-mobile-menu>
+      <app-logo></app-logo>
+      <app-navbar [class.mobile-visible]="isMobileMenuOpen"></app-navbar>
+      <app-basket></app-basket>
+    </div>
+  </div>
+
+  <!-- Overlay pour le menu mobile -->
+  <div class="mobile-menu-overlay" [class.active]="isMobileMenuOpen" (click)="onMenuToggle(false)"></div>
+</header>

@@ -1,12 +1,15 @@
-@use "../../../design-system/styles/variables" as vars;
-@use "../../../design-system/styles/typography" as vars;
+@use "../../../../app/design-system/styles/variables" as vars;
 
-.logo-item{
+.logo {
+  a {
     color: vars.$white;
-    font-size: vars.$h5-font-size;
-    font-weight: vars.$font-weight-bold;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
 
-    &:hover{
-        color: vars.$primary;
+    &:hover {
+      color: vars.$primary;
     }
+  }
 }

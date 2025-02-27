@@ -4,28 +4,13 @@ import { Component } from '@angular/core';
   selector: 'app-navbar',
   standalone: false,
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-
-  navLinks = [
-    {
-      label: 'HOME',
-      link: '/',
-    },
-    {
-      label: 'HEADPHONES',
-      link: '/headphones',
-    },
-    {
-      label: 'SPEAKERS',
-      link: '/speakers',
-    },
-    {
-      label: 'EARPHONES',
-      link: '/earphones',
-    }
+  navItems = [
+    { label: 'HOME', route: '/' },
+    { label: 'HEADPHONES', route: '/headphones' },
+    { label: 'SPEAKERS', route: '/speakers' },
+    { label: 'EARPHONES', route: '/earphones' },
   ];
-
-  
 }
