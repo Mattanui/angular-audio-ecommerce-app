@@ -1,0 +1,13 @@
+<div class="product-card">
+  <div class="product-image">
+    <img [src]="product.categoryImage.desktop" [alt]="product.name" class="img-fluid">
+  </div>
+
+  <div class="product-content">
+    <div *ngIf="product.new" class="product-badge">NOUVEAU</div>
+    <h3 class="product-title">{{ product.name }}</h3>
+    <p class="product-description">{{ product.description }}</p>
+    <div class="product-price">{{ product.price | currency:'EUR' }}</div>
+    <button class="btn-primary" (click)="navigateToProductDetail()">VOIR PRODUIT</button>
+  </div>
+</div>

@@ -43,7 +43,7 @@
   }
 }
 
-// Bouton 2 - Secondaire (souligné en noir)
+// Bouton 2 - Secondaire (fond transparent/ bordure noir)
 .btn-secondary {
   @extend .btn;
   background-color: transparent;
@@ -57,11 +57,24 @@
   }
 }
 
-// Bouton 3 - Texte avec flèche (Boutique)
+// Bouton 3 - tertiaire (fond noir/gris foncé)
+.btn-dark {
+  @extend .btn;
+  background-color: vars.$black;
+  color: vars.$white;
+  transition: all vars.$transition-normal;
+
+  &:hover,
+  &:focus {
+    background-color: vars.$grayish-black;
+  }
+}
+
+// Bouton 4 - Texte avec flèche (Boutique)
 .btn-text {
   @extend .btn;
   background-color: transparent;
-  color: vars.$black;
+  color: vars.$light-grayish-black;
   padding: 0;
   min-width: auto;
   height: auto;
@@ -69,6 +82,7 @@
 
   &::after {
     content: ">";
+    color: vars.$primary;
     margin-left: 0.5rem;
     font-size: 1rem;
     transition: transform vars.$transition-normal;

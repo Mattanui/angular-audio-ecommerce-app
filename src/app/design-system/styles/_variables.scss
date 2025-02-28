@@ -9,12 +9,19 @@ $primary-light: #fbaf85; // Orange clair (#FBAF85 - RGB: 251, 175, 133)
 $pure-white: #ffffff; // Blanc pur (#FFFFFF - RGB: 255, 255, 255)
 $pure-black: #000000; // Noir pur (#000000 - RGB: 0, 0, 0)
 
+// Couleurs tertiaires
+$grayish-black: #2e2e2e; // Noir grisâtre (#2E2E2E - RGB: 46, 46, 46)
+$light-grayish-black: #4a4a4a; // Noir grisâtre clair (#4A4A4A - RGB: 74, 74, 74)
+
 // Espacements
+$spacing-xxs: 0.25rem; // 4px
 $spacing-xs: 0.5rem; // 8px
 $spacing-sm: 1rem; // 16px
 $spacing-md: 1.5rem; // 24px
 $spacing-lg: 2rem; // 32px
 $spacing-xl: 3rem; // 48px
+$spacing-xxl: 4rem; // 64px
+$spacing-xxxl: 5rem; // 80px
 
 // Breakpoints
 $breakpoint-sm: 576px;
