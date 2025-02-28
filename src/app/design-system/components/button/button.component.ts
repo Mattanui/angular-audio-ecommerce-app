@@ -14,7 +14,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ButtonComponent {
-  @Input() variant: 'primary' | 'secondary' | 'text' = 'primary';
+  @Input() variant: 'primary' | 'secondary' | 'text' | 'dark' = 'primary';
   @Input() type: 'button' | 'submit' | 'reset' = 'button';
   @Input() disabled = false;
   @Output() buttonClick = new EventEmitter<Event>();
