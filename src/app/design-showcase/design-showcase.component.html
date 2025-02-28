@@ -119,7 +119,14 @@
       </div>
 
       <div class="button-item">
-        <div class="button-label">Button 3 - Text (Default)</div>
+        <div class="button-label">Button 3 - Tertiaire (Default)</div>
+        <app-button variant="dark" (buttonClick)="onDarkButtonClick($event)">
+          {{ darkButtonClicked ? 'Cliqué !' : 'SEE PRODUCT' }}
+        </app-button>
+      </div>
+
+      <div class="button-item">
+        <div class="button-label">Button 4 - Text (Default)</div>
         <app-button variant="text" (buttonClick)="onTextButtonClick($event)">
           {{ textButtonClicked ? 'Cliqué !' : 'Shop' }}
         </app-button>

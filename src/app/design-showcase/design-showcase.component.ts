@@ -17,6 +17,7 @@ export class DesignShowcaseComponent implements OnInit {
   primaryButtonClicked = false;
   secondaryButtonClicked = false;
   textButtonClicked = false;
+  darkButtonClicked = false;
 
   // Pour démontrer les radio buttons
   selectedPaymentMethod = 'card';
@@ -61,6 +62,11 @@ export class DesignShowcaseComponent implements OnInit {
   onTextButtonClick(event: Event): void {
     this.textButtonClicked = true;
     setTimeout(() => (this.textButtonClicked = false), 1000);
+  }
+
+  onDarkButtonClick(event: Event): void {
+    this.darkButtonClicked = true;
+    setTimeout(() => (this.darkButtonClicked = false), 1000);
   }
 
   // Méthode pour démontrer les radio buttons
