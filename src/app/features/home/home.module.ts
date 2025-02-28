@@ -7,6 +7,7 @@ import { DesignSystemModule } from '../../design-system/design-system.module';
 
 import { HomeComponent } from './pages/home/home.component';
 import { HeroComponent } from './components/hero/hero.component';
+import { CategoriesModule } from '../categories/categories.module';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
     SharedModule,
     DesignSystemModule,
     RouterModule.forChild(routes),
+    CategoriesModule,
   ],
 })
 export class HomeModule {}
