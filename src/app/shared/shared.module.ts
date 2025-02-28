@@ -8,6 +8,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { BasketComponent } from './components/basket/basket.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MobileMenuComponent } from './components/mobile-menu/mobile-menu.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -17,8 +18,9 @@ import { MobileMenuComponent } from './components/mobile-menu/mobile-menu.compon
     BasketComponent,
     FooterComponent,
     MobileMenuComponent,
+    AboutComponent,
   ],
   imports: [CommonModule, RouterModule],
-  exports: [HeaderComponent, FooterComponent, RouterModule],
+  exports: [HeaderComponent, FooterComponent, AboutComponent, RouterModule],
 })
 export class SharedModule {}
