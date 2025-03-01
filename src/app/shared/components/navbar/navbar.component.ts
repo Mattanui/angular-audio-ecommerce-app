@@ -9,8 +9,8 @@ import { Component } from '@angular/core';
 export class NavbarComponent {
   navItems = [
     { label: 'HOME', route: '/' },
-    { label: 'HEADPHONES', route: '/headphones' },
-    { label: 'SPEAKERS', route: '/speakers' },
-    { label: 'EARPHONES', route: '/earphones' },
+    { label: 'HEADPHONES', route: '/categories/headphones' },
+    { label: 'SPEAKERS', route: '/categories/speakers' },
+    { label: 'EARPHONES', route: '/categories/earphones' },
   ];
 }
