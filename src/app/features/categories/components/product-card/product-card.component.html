@@ -1,6 +1,10 @@
 <div class="product-card">
   <div class="product-image">
-    <img [src]="product.categoryImage.desktop" [alt]="product.name" class="img-fluid">
+    <picture>
+      <source media="(max-width: 576px)" [srcset]="getMobileImagePath()">
+      <source media="(max-width: 992px)" [srcset]="getTabletImagePath()">
+      <img [src]="getDesktopImagePath()" [alt]="product.name" class="img-fluid">
+    </picture>
   </div>
 
   <div class="product-content">
