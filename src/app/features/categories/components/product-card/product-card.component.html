@@ -1,13 +1,16 @@
 <div class="product-card">
   <div class="product-image">
-    <img [src]="product.categoryImage.desktop" [alt]="product.name" class="img-fluid">
+    <picture>
+      <source media="(max-width: 576px)" [srcset]="getMobileImagePath()">
+      <source media="(max-width: 992px)" [srcset]="getTabletImagePath()">
+      <img [src]="getDesktopImagePath()" [alt]="product.name" class="img-fluid">
+    </picture>
   </div>
 
   <div class="product-content">
-    <div *ngIf="product.new" class="product-badge">NOUVEAU</div>
+    <div *ngIf="product.new" class="product-badge">NEW PRODUCT</div>
     <h3 class="product-title">{{ product.name }}</h3>
     <p class="product-description">{{ product.description }}</p>
-    <div class="product-price">{{ product.price | currency:'EUR' }}</div>
-    <button class="btn-primary" (click)="navigateToProductDetail()">VOIR PRODUIT</button>
+    <button class="btn-primary" (click)="navigateToProductDetail()">SEE PRODUCT</button>
   </div>
 </div>

@@ -30,7 +30,17 @@ export class CategoryDetailComponent implements OnInit {
     this._categoryService.getProductsByCategory(this.category).subscribe({
       next: (products) => {
         console.log('Produits récupérés:', products);
-        this.products = products;
+
+        // ?Trie les produits par nouveaux d'abord, puis par ordre alphabétique
+        this.products = products.sort((a, b) => {
+          // D'abord par statut "new"
+          if (a.new && !b.new) return -1;
+          if (!a.new && b.new) return 1;
+
+          // ?Ensuite par nom (ordre alphabétique) en cas d'égalité
+          return a.name.localeCompare(b.name);
+        });
+
         this.loading = false;
       },
       error: (error) => {

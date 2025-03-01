@@ -1,4 +1,4 @@
-<div class="category-detail-page">
+<div class="category-detail">
   <div class="container">
     <h1 class="category-title">{{ category | titlecase }}</h1>
 
@@ -8,10 +8,10 @@
       Aucun produit trouvé dans cette catégorie.
     </div>
 
-    <div class="product-grid" *ngIf="!loading && products.length > 0">
-      <div class="product-item" *ngFor="let product of products">
-        <app-product-card [product]="product"></app-product-card>
-      </div>
+    <div class="product-list" *ngIf="!loading && products.length > 0">
+      <app-product-card *ngFor="let product of products; let i = index" [product]="product"
+        [ngClass]="{'even': i % 2 === 1, 'odd': i % 2 === 0}">
+      </app-product-card>
     </div>
   </div>
   <app-category-list></app-category-list>

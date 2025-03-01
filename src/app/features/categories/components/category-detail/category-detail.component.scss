@@ -1,0 +1,15 @@
+@use "../../../../design-system/styles/variables" as vars;
+@use "../../../../design-system/styles/mixins" as mix;
+
+.category-title {
+  text-align: center;
+  margin-bottom: 5rem;
+  font-size: 2.5rem;
+}
+
+.product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+  margin-bottom: 7rem;
+}
