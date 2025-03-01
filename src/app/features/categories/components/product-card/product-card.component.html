@@ -11,7 +11,6 @@
     <div *ngIf="product.new" class="product-badge">NEW PRODUCT</div>
     <h3 class="product-title">{{ product.name }}</h3>
     <p class="product-description">{{ product.description }}</p>
-    <div class="product-price">{{ product.price | currency:'EUR' }}</div>
     <button class="btn-primary" (click)="navigateToProductDetail()">SEE PRODUCT</button>
   </div>
 </div>
