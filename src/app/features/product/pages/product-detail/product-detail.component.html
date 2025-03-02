@@ -17,7 +17,7 @@
         <div *ngIf="product.new" class="product-badge">NEW PRODUCT</div>
         <h1 class="product-title">{{ product.name }}</h1>
         <p class="product-description">{{ product.description }}</p>
-        <p class="product-price">{{ product.price | currency: 'EUR' }}</p>
+        <p class="product-price">{{ product.price | currency: 'USD':'symbol':'1.0-0' }}</p>
 
         <div class="product-actions">
           <div class="quantity-selector">

@@ -85,6 +85,10 @@
   font-weight: bold;
   font-size: 1.5rem;
   margin-bottom: 3rem;
+
+  &::first-letter {
+    margin-right: 5px;
+  }
 }
 
 .product-actions {
