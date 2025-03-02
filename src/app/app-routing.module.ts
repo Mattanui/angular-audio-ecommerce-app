@@ -17,6 +17,11 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'products',
+    loadChildren: () =>
+      import('./features/product/product.module').then((m) => m.ProductModule),
+  },
+  {
     path: '',
     loadChildren: () =>
       import('./features/home/home.module').then((m) => m.HomeModule),
@@ -33,4 +38,3 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
-
