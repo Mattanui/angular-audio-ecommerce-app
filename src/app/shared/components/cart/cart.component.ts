@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-basket',
+  selector: 'app-cart',
   standalone: false,
-  templateUrl: './basket.component.html',
-  styleUrl: './basket.component.scss',
+  templateUrl: './cart.component.html',
+  styleUrl: './cart.component.scss',
 })
-export class BasketComponent {
+export class CartComponent {
   // TODO: ajouter des fonctionnalités liées au panier
   // ex: nombre d'articles, ouvrir/fermer le panier, etc.
   itemCount = 0;
 
-  toggleBasket() {
+  toggleCart() {
     // *Implémentation future pour ouvrir/fermer le panier
-    console.log('Basket toggled');
+    console.log('Cart toggled');
   }
 }
