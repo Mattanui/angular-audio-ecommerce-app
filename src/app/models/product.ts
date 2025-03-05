@@ -25,6 +25,7 @@ export interface Product {
   id: number;
   slug: string;
   name: string;
+  shortName?: string;
   image: Image;
   category: string;
   categoryImage: Image;

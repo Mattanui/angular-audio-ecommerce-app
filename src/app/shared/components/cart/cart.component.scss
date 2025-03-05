@@ -1,10 +1,9 @@
-// src/app/shared/components/basket/basket.component.scss
 @use "../../../../app/design-system/styles/variables" as vars;
 
-.basket {
+.cart {
   position: relative;
 
-  .basket-button {
+  .cart-button {
     background: transparent;
     border: none;
     cursor: pointer;
@@ -25,7 +24,7 @@
     }
   }
 
-  .basket-count {
+  .cart-count {
     position: absolute;
     top: -8px;
     right: -8px;
