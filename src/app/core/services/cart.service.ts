@@ -11,20 +11,35 @@ export interface CartItem {
   providedIn: 'root',
 })
 export class CartService {
-  private cartItems: CartItem[] = [];
-  private cartSubject = new BehaviorSubject<CartItem[]>([]);
+  private _cartItems: CartItem[] = [];
+  private _cartSubject = new BehaviorSubject<CartItem[]>([]);
+
+  private _cartDialogSubject = new BehaviorSubject<boolean>(false);
+  public cartDialogState = this._cartDialogSubject.asObservable();
 
   constructor() {
     // Récupère le panier depuis le localStorage au démarrage
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
-      this.cartItems = JSON.parse(savedCart);
-      this.cartSubject.next(this.cartItems);
+      this._cartItems = JSON.parse(savedCart);
+      this._cartSubject.next(this._cartItems);
+    }
+  }
+
+  // Ouvre/ferme le dialogue du panier
+  toggleCartDialog(isOpen: boolean): void {
+    this._cartDialogSubject.next(isOpen);
+
+    // Gère la classe sur le body pour empêcher le défilement
+    if (isOpen) {
+      document.body.classList.add('menu-open');
+    } else {
+      document.body.classList.remove('menu-open');
     }
   }
 
   getCart(): Observable<CartItem[]> {
-    return this.cartSubject.asObservable();
+    return this._cartSubject.asObservable();
   }
 
   getCartItemsCount(): Observable<number> {
@@ -38,7 +53,7 @@ export class CartService {
 
   addToCart(product: Product, quantity: number): void {
     // Vérifie si le produit est déjà dans le panier
-    const existingItem = this.cartItems.find(
+    const existingItem = this._cartItems.find(
       (item) => item.product.id === product.id
     );
 
@@ -47,7 +62,7 @@ export class CartService {
       existingItem.quantity += quantity;
     } else {
       // Ajoute un nouvel élément
-      this.cartItems.push({ product, quantity });
+      this._cartItems.push({ product, quantity });
     }
 
     // Met à jour le subject et sauvegarder dans le localStorage
@@ -55,7 +70,7 @@ export class CartService {
   }
 
   updateQuantity(productId: number, quantity: number): void {
-    const item = this.cartItems.find((item) => item.product.id === productId);
+    const item = this._cartItems.find((item) => item.product.id === productId);
 
     if (item) {
       item.quantity = quantity;
@@ -64,24 +79,24 @@ export class CartService {
   }
 
   removeFromCart(productId: number): void {
-    this.cartItems = this.cartItems.filter(
+    this._cartItems = this._cartItems.filter(
       (item) => item.product.id !== productId
     );
     this._updateCart();
   }
 
   clearCart(): void {
-    this.cartItems = [];
+    this._cartItems = [];
     this._updateCart();
   }
 
   private _updateCart(): void {
-    this.cartSubject.next([...this.cartItems]);
-    localStorage.setItem('cart', JSON.stringify(this.cartItems));
+    this._cartSubject.next([...this._cartItems]);
+    localStorage.setItem('cart', JSON.stringify(this._cartItems));
   }
 
   getTotal(): number {
-    return this.cartItems.reduce(
+    return this._cartItems.reduce(
       (total, item) => total + item.product.price * item.quantity,
       0
     );
