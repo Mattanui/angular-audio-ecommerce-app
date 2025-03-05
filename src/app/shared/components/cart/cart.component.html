@@ -13,4 +13,7 @@
     </svg>
     <span class="cart-count" *ngIf="itemCount > 0">{{ itemCount }}</span>
   </button>
+
+  <!-- Cart Dialog - s'affiche lorsque isCartOpen est true -->
+  <app-cart-dialog *ngIf="isCartOpen" (closeCart)="isCartOpen = false"></app-cart-dialog>
 </div>

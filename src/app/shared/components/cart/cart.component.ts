@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CartService } from '../../../core/services/cart.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -6,13 +8,30 @@ import { Component } from '@angular/core';
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })
-export class CartComponent {
-  // TODO: ajouter des fonctionnalités liées au panier
-  // ex: nombre d'articles, ouvrir/fermer le panier, etc.
+export class CartComponent implements OnInit, OnDestroy {
   itemCount = 0;
+  isCartOpen = false;
+  private _subscription: Subscription = new Subscription();
 
-  toggleCart() {
-    // *Implémentation future pour ouvrir/fermer le panier
-    console.log('Cart toggled');
+  constructor(private _cartService: CartService) {
+    this._cartService.cartDialogState.subscribe((isOpen) => {
+      this.isCartOpen = isOpen;
+    });
+  }
+
+  ngOnInit(): void {
+    this._subscription.add(
+      this._cartService.getCartItemsCount().subscribe((count) => {
+        this.itemCount = count;
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this._subscription.unsubscribe();
+  }
+
+  toggleCart(): void {
+    this._cartService.toggleCartDialog(true);
   }
 }
