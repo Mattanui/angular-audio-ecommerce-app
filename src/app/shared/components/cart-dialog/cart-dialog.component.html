@@ -1,27 +1,25 @@
-<div class="cart-dialog-overlay" (click)="closeCart.emit()">
+<div class="cart-dialog-overlay" (click)="closeDialog()">
   <div class="container">
     <div class="cart-dialog" (click)="$event.stopPropagation()">
       <div class="cart-header">
         <h6>CART ({{ cartItems.length }})</h6>
-        <button class="btn-text" (click)="removeAll()" *ngIf="cartItems.length > 0">Remove all</button>
+        <app-button variant="text" (buttonClick)="removeAll()" *ngIf="cartItems.length > 0">
+          Remove all
+        </app-button>
       </div>
 
       <div class="cart-items">
         <div class="cart-item" *ngFor="let item of cartItems">
           <div class="cart-item-image">
-            <img [src]="'/public/assets/images/' + item.product.slug + '/desktop/image-product.jpg'"
-              alt="{{ item.product.name }}" class="img-fluid">
+            <img [src]="getProductImageUrl(item.product)" [alt]="item.product.name" class="img-fluid">
           </div>
           <div class="cart-item-details">
-            <h6 class="cart-item-name">{{ item.product.shortName }}</h6>
+            <h6 class="cart-item-name">{{ item.product.shortName || item.product.name }}</h6>
             <p class="cart-item-price">${{ item.product.price.toLocaleString() }}</p>
           </div>
-          <div class="number-input">
-            <button class="number-btn" (click)="updateQuantity(item.product.id, item.quantity - 1)"
-              [disabled]="item.quantity <= 1">-</button>
-            <span class="number-value">{{ item.quantity }}</span>
-            <button class="number-btn" (click)="updateQuantity(item.product.id, item.quantity + 1)">+</button>
-          </div>
+          <app-number-input [value]="item.quantity" [min]="0" [max]="99"
+            (valueChange)="updateQuantity(item.product.id, $event)">
+          </app-number-input>
         </div>
 
         <div class="cart-empty" *ngIf="cartItems.length === 0">

@@ -1,6 +1,6 @@
 @use "../../../design-system/styles/variables" as vars;
 @use "../../../design-system/styles/mixins" as mix;
-@use "../../../design-system/styles/typography" as type;
+@use "../../../design-system/styles/typography" as typo;
 
 .cart-dialog-overlay {
   position: fixed;
@@ -51,6 +51,7 @@
   margin-bottom: 2rem;
 
   h6 {
+    color: vars.$light-grayish-black;
     margin-bottom: 0;
   }
 }
@@ -91,19 +92,22 @@
 }
 
 .cart-item-name {
+  color: vars.$black;
+  font-size: typo.$body-font-size;
   margin-bottom: 0.25rem;
 }
 
 .cart-item-price {
   color: vars.$light-grayish-black;
-  font-weight: type.$font-weight-bold;
+  font-size: typo.$overline-font-size;
+  font-weight: typo.$font-weight-bold;
   margin: 0;
 }
 
 .cart-empty {
+  color: vars.$light-grayish-black;
   text-align: center;
   padding: 2rem 0;
-  color: vars.$light-grayish-black;
 }
 
 .cart-footer {
@@ -118,7 +122,7 @@
   color: vars.$light-grayish-black;
 
   .cart-total-price {
-    font-weight: type.$font-weight-bold;
+    font-weight: typo.$font-weight-bold;
     color: vars.$black;
     font-size: 1.125rem;
   }
