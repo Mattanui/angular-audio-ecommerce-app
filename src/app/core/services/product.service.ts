@@ -12,7 +12,7 @@ export class ProductService {
 
   constructor(private _http: HttpClient) {}
 
-  // Récupérer un produit par son slug
+  // Récupère un produit par son slug
   getProductBySlug(slug: string): Observable<Product> {
     return this._http.get<Product[]>(`${this._apiUrl}/products`).pipe(
       map((products) => {
@@ -27,12 +27,19 @@ export class ProductService {
     );
   }
 
-  // Récupérer des produits par leurs slugs (pour les produits suggérés)
+  // Récupère les produits par leurs slugs (pour les produits suggérés)
   getProductsBySlugs(slugs: string[]): Observable<Product[]> {
     return this._http.get<Product[]>(`${this._apiUrl}/products`).pipe(
       map((products) => {
         return products.filter((product) => slugs.includes(product.slug));
       })
     );
+  }
+
+  // Récupère les nouveaux produits
+  getNewProducts(): Observable<Product[]> {
+    return this._http
+      .get<Product[]>(`${this._apiUrl}/products`)
+      .pipe(map((products) => products.filter((product) => product.new)));
   }
 }
