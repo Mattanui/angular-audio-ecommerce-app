@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../../../core/services/catagory.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class CategoryDetailComponent implements OnInit {
   loading: boolean = true;
 
   constructor(
+    private _router: Router,
     private _route: ActivatedRoute,
     private _categoryService: CategoryService
   ) {}
@@ -48,5 +49,9 @@ export class CategoryDetailComponent implements OnInit {
         this.loading = false;
       },
     });
+  }
+
+  backToHome() {
+    this._router.navigate(['/']);
   }
 }
