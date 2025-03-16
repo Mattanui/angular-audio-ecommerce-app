@@ -7,6 +7,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { DesignSystemModule } from '../../design-system/design-system.module';
 
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { CheckoutSummaryComponent } from './components/checkout-summary/checkout-summary.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [CheckoutComponent],
+  declarations: [CheckoutComponent, CheckoutSummaryComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
