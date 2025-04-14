@@ -1,0 +1,187 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>MON PROFIL</h1>
+  </div>
+
+  <div class="main-container">
+    <div class="profile-container">
+      <div class="tabs">
+        <button class="tab-button" [class.active]="activeTab === 'profile'" (click)="onTabChange('profile')">
+          INFORMATIONS PERSONNELLES
+        </button>
+        <button class="tab-button" [class.active]="activeTab === 'orders'" (click)="onTabChange('orders')">
+          MES COMMANDES
+        </button>
+      </div>
+
+      <!-- Onglet Profil -->
+      @if (activeTab === 'profile') {
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
+        <!-- Messages -->
+        @if (success) {
+        <div class="alert alert-success">
+          {{ success }}
+        </div>
+        }
+        @if (error) {
+        <div class="alert alert-error">
+          {{ error }}
+        </div>
+        }
+
+        <!-- Informations personnelles -->
+        <div class="form-section">
+          <h2>INFORMATIONS PERSONNELLES</h2>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" formControlName="email" class="form-control" />
+            @if (profileForm.get('email')?.errors?.['required'] && profileForm.get('email')?.touched) {
+            <span class="error-message">L'email est requis</span>
+            }
+            @if (profileForm.get('email')?.errors?.['email'] && profileForm.get('email')?.touched) {
+            <span class="error-message">L'email n'est pas valide</span>
+            }
+          </div>
+
+          <div class="form-group">
+            <label for="firstName">Prénom</label>
+            <input type="text" id="firstName" formControlName="firstName" class="form-control" />
+            @if (profileForm.get('firstName')?.errors?.['required'] &&
+            profileForm.get('firstName')?.touched) {
+            <span class="error-message">Le prénom est requis</span>
+            }
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Nom</label>
+            <input type="text" id="lastName" formControlName="lastName" class="form-control" />
+            @if (profileForm.get('lastName')?.errors?.['required'] && profileForm.get('lastName')?.touched)
+            {
+            <span class="error-message">Le nom est requis</span>
+            }
+          </div>
+        </div>
+
+        <!-- Changement de mot de passe -->
+        <div class="form-section">
+          <h2>CHANGER LE MOT DE PASSE</h2>
+          <p class="section-description">Laissez les champs vides si vous ne souhaitez pas modifier votre mot de passe
+          </p>
+
+          <div class="form-group">
+            <label for="currentPassword">Mot de passe actuel</label>
+            <input type="password" id="currentPassword" formControlName="currentPassword" class="form-control" />
+          </div>
+
+          <div class="form-group">
+            <label for="newPassword">Nouveau mot de passe</label>
+            <input type="password" id="newPassword" formControlName="newPassword" class="form-control" />
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirmer le nouveau mot de passe</label>
+            <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control" />
+          </div>
+        </div>
+
+        <!-- Boutons d'action -->
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid || loading">
+            @if (loading) {
+            <span>Mise à jour en cours...</span>
+            } @else {
+            <span>Mettre à jour le profil</span>
+            }
+          </button>
+        </div>
+      </form>
+      }
+
+      <!-- Onglet Commandes -->
+      @if (activeTab === 'orders') {
+      <div class="orders-container">
+        @if (error) {
+        <div class="alert alert-error">
+          {{ error }}
+        </div>
+        }
+
+        @if (loading) {
+        <div class="loading-message">Chargement des commandes...</div>
+        } @else {
+        <!-- Commandes en cours -->
+        <div class="form-section">
+          <h2>COMMANDES EN COURS</h2>
+          @if (currentOrders.length === 0) {
+          <p class="empty-message">Aucune commande en cours</p>
+          } @else {
+          <div class="orders-list">
+            @for (order of currentOrders; track order.id) {
+            <div class="order-card">
+              <div class="order-header">
+                <span class="order-number">Commande #{{ order.id }}</span>
+                <span class="order-date">{{ order.date | date:'dd/MM/yyyy' }}</span>
+                <span class="order-status">{{ order.status }}</span>
+              </div>
+              <div class="order-items">
+                @for (item of order.items; track item.id) {
+                <div class="order-item">
+                  <img [src]="item.image" [alt]="item.name" class="item-image">
+                  <div class="item-details">
+                    <h3>{{ item.name }}</h3>
+                    <p>{{ item.price | currency:'EUR' }}</p>
+                    <p>Quantité : {{ item.quantity }}</p>
+                  </div>
+                </div>
+                }
+              </div>
+              <div class="order-footer">
+                <span class="order-total">Total : {{ order.total | currency:'EUR' }}</span>
+              </div>
+            </div>
+            }
+          </div>
+          }
+        </div>
+
+        <!-- Historique des commandes -->
+        <div class="form-section">
+          <h2>HISTORIQUE DES COMMANDES</h2>
+          @if (orderHistory.length === 0) {
+          <p class="empty-message">Aucune commande passée</p>
+          } @else {
+          <div class="orders-list">
+            @for (order of orderHistory; track order.id) {
+            <div class="order-card">
+              <div class="order-header">
+                <span class="order-number">Commande #{{ order.id }}</span>
+                <span class="order-date">{{ order.date | date:'dd/MM/yyyy' }}</span>
+                <span class="order-status">{{ order.status }}</span>
+              </div>
+              <div class="order-items">
+                @for (item of order.items; track item.id) {
+                <div class="order-item">
+                  <img [src]="item.image" [alt]="item.name" class="item-image">
+                  <div class="item-details">
+                    <h3>{{ item.name }}</h3>
+                    <p>{{ item.price | currency:'EUR' }}</p>
+                    <p>Quantité : {{ item.quantity }}</p>
+                  </div>
+                </div>
+                }
+              </div>
+              <div class="order-footer">
+                <span class="order-total">Total : {{ order.total | currency:'EUR' }}</span>
+              </div>
+            </div>
+            }
+          </div>
+          }
+        </div>
+        }
+      </div>
+      }
+    </div>
+  </div>
+</div>

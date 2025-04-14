@@ -8,16 +8,25 @@ import { DesignSystemModule } from '../../design-system/design-system.module';
 
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { CheckoutSummaryComponent } from './components/checkout-summary/checkout-summary.component';
+import { OrderConfirmationComponent } from './pages/order-confirmation/order-confirmation.component';
 
 const routes: Routes = [
   {
     path: '',
     component: CheckoutComponent,
   },
+  {
+    path: 'confirmation',
+    component: OrderConfirmationComponent,
+  },
 ];
 
 @NgModule({
-  declarations: [CheckoutComponent, CheckoutSummaryComponent],
+  declarations: [
+    CheckoutComponent,
+    CheckoutSummaryComponent,
+    OrderConfirmationComponent,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
