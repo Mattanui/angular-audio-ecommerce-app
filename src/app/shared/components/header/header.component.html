@@ -1,10 +1,38 @@
-<header class="header">
+<header class="header" (click)="closeUserMenu()">
   <div class="container">
     <div class="header-content">
       <app-mobile-menu (menuToggle)="onMenuToggle($event)" class="mobile-menu"></app-mobile-menu>
-      <app-logo></app-logo>
+      <a routerLink="/" class="logo">
+        <img src="assets/images/shared/desktop/logo.svg" alt="Audio Store Logo" />
+      </a>
       <app-navbar [class.mobile-visible]="isMobileMenuOpen"></app-navbar>
-      <app-cart></app-cart>
+
+      <!-- Actions utilisateur -->
+      <div class="user-actions">
+        <!-- Menu utilisateur -->
+        <div class="user-menu-container" clickOutside (clickOutside)="closeUserMenu()">
+          <button class="user-icon-btn" [class.active]="isUserMenuOpen" (click)="toggleUserMenu($event)">
+            <app-user-icon></app-user-icon>
+          </button>
+
+          @if (isUserMenuOpen) {
+          <div class="user-dropdown">
+            <div class="dropdown-content">
+              @if (isLoggedIn$ | async) {
+              <span class="user-name">{{ (currentUser$ | async)?.email }}</span>
+              <a routerLink="/profile" class="dropdown-item" (click)="closeUserMenu()">Mon profil</a>
+              <a routerLink="/orders" class="dropdown-item" (click)="closeUserMenu()">Mes commandes</a>
+              <button class="dropdown-item" (click)="logout()">Se déconnecter</button>
+              } @else {
+              <a routerLink="/auth/login" class="dropdown-item" (click)="closeUserMenu()">Se connecter</a>
+              }
+            </div>
+          </div>
+          }
+        </div>
+
+        <app-cart></app-cart>
+      </div>
     </div>
   </div>
 
