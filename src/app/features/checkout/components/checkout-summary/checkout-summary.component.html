@@ -44,7 +44,7 @@
   </div>
 
   <!-- Bouton de validation -->
-  <button class="btn-primary continue-btn" [disabled]="cartItems.length === 0" (click)="submitOrder()">
+  <button class="btn-primary continue-btn" [disabled]="cartItems.length === 0 || !formValid" (click)="submitOrder()">
     CONTINUE
   </button>
 

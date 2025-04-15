@@ -4,7 +4,7 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail.co
 
 const routes: Routes = [
   {
-    path: ':slug',
+    path: ':category/:slug',
     component: ProductDetailComponent,
   },
 ];

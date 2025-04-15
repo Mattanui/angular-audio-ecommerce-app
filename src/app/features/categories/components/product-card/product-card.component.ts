@@ -37,6 +37,10 @@ export class ProductCardComponent {
   }
 
   navigateToProductDetail(): void {
-    this._router.navigate(['/products', this.product.slug]);
+    this._router.navigate([
+      '/products',
+      this.product.category,
+      this.product.slug,
+    ]);
   }
 }

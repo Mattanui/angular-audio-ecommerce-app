@@ -1,13 +1,14 @@
 @use "../../../../app/design-system/styles/variables" as vars;
 @use "../../../../app/design-system/styles/mixins" as mix;
+@use "../../../../app/design-system/styles/typography" as typo;
 
 .header {
+  // border: 3px solid red;
+
   background-color: vars.$black;
   color: vars.$white;
   padding: 2rem 0;
   position: relative;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 100;
 
   .container {
     width: 100%;
@@ -42,8 +43,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 96px;
-    position: relative;
 
     .mobile-menu {
       display: none; // Caché par défaut sur desktop
@@ -145,7 +144,7 @@
 
 .user-dropdown {
   position: absolute;
-  top: calc(100% + 0.5rem);
+  top: calc(100% + 4rem);
   right: 0;
   background-color: vars.$white;
   border-radius: 8px;
@@ -201,7 +200,8 @@
   padding: 0.75rem 1rem;
   color: vars.$black;
   text-decoration: none;
-  font-size: 0.875rem;
+  font-size: typo.$body-font-size;
+  font-weight: typo.$font-weight-bold;
   text-align: left;
   background: none;
   border: none;

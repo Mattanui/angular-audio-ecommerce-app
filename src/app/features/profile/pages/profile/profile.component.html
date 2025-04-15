@@ -1,20 +1,20 @@
 <div class="page-container">
   <div class="page-header">
-    <h1>MON PROFIL</h1>
+    <h1>MY PROFILE</h1>
   </div>
 
   <div class="main-container">
     <div class="profile-container">
       <div class="tabs">
         <button class="tab-button" [class.active]="activeTab === 'profile'" (click)="onTabChange('profile')">
-          INFORMATIONS PERSONNELLES
+          PERSONAL INFORMATION
         </button>
         <button class="tab-button" [class.active]="activeTab === 'orders'" (click)="onTabChange('orders')">
-          MES COMMANDES
+          MY ORDERS
         </button>
       </div>
 
-      <!-- Onglet Profil -->
+      <!-- Profile Tab -->
       @if (activeTab === 'profile') {
       <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
         <!-- Messages -->
@@ -29,76 +29,73 @@
         </div>
         }
 
-        <!-- Informations personnelles -->
+        <!-- Personal Information -->
         <div class="form-section">
-          <h2>INFORMATIONS PERSONNELLES</h2>
+          <h2>PERSONAL INFORMATION</h2>
 
           <div class="form-group">
             <label for="email">Email</label>
             <input type="email" id="email" formControlName="email" class="form-control" />
             @if (profileForm.get('email')?.errors?.['required'] && profileForm.get('email')?.touched) {
-            <span class="error-message">L'email est requis</span>
+            <span class="error-message">Email is required</span>
             }
             @if (profileForm.get('email')?.errors?.['email'] && profileForm.get('email')?.touched) {
-            <span class="error-message">L'email n'est pas valide</span>
+            <span class="error-message">Email is not valid</span>
             }
           </div>
 
           <div class="form-group">
-            <label for="firstName">Prénom</label>
+            <label for="firstName">First Name</label>
             <input type="text" id="firstName" formControlName="firstName" class="form-control" />
-            @if (profileForm.get('firstName')?.errors?.['required'] &&
-            profileForm.get('firstName')?.touched) {
-            <span class="error-message">Le prénom est requis</span>
+            @if (profileForm.get('firstName')?.errors?.['required'] && profileForm.get('firstName')?.touched) {
+            <span class="error-message">First name is required</span>
             }
           </div>
 
           <div class="form-group">
-            <label for="lastName">Nom</label>
+            <label for="lastName">Last Name</label>
             <input type="text" id="lastName" formControlName="lastName" class="form-control" />
-            @if (profileForm.get('lastName')?.errors?.['required'] && profileForm.get('lastName')?.touched)
-            {
-            <span class="error-message">Le nom est requis</span>
+            @if (profileForm.get('lastName')?.errors?.['required'] && profileForm.get('lastName')?.touched) {
+            <span class="error-message">Last name is required</span>
             }
           </div>
         </div>
 
-        <!-- Changement de mot de passe -->
+        <!-- Password Change -->
         <div class="form-section">
-          <h2>CHANGER LE MOT DE PASSE</h2>
-          <p class="section-description">Laissez les champs vides si vous ne souhaitez pas modifier votre mot de passe
-          </p>
+          <h2>CHANGE PASSWORD</h2>
+          <p class="section-description">Leave fields empty if you don't want to change your password</p>
 
           <div class="form-group">
-            <label for="currentPassword">Mot de passe actuel</label>
+            <label for="currentPassword">Current Password</label>
             <input type="password" id="currentPassword" formControlName="currentPassword" class="form-control" />
           </div>
 
           <div class="form-group">
-            <label for="newPassword">Nouveau mot de passe</label>
+            <label for="newPassword">New Password</label>
             <input type="password" id="newPassword" formControlName="newPassword" class="form-control" />
           </div>
 
           <div class="form-group">
-            <label for="confirmPassword">Confirmer le nouveau mot de passe</label>
+            <label for="confirmPassword">Confirm New Password</label>
             <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control" />
           </div>
         </div>
 
-        <!-- Boutons d'action -->
+        <!-- Action Buttons -->
         <div class="form-actions">
           <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid || loading">
             @if (loading) {
-            <span>Mise à jour en cours...</span>
+            <span>Updating...</span>
             } @else {
-            <span>Mettre à jour le profil</span>
+            <span>Update Profile</span>
             }
           </button>
         </div>
       </form>
       }
 
-      <!-- Onglet Commandes -->
+      <!-- Orders Tab -->
       @if (activeTab === 'orders') {
       <div class="orders-container">
         @if (error) {
@@ -108,20 +105,20 @@
         }
 
         @if (loading) {
-        <div class="loading-message">Chargement des commandes...</div>
+        <div class="loading-message">Loading orders...</div>
         } @else {
-        <!-- Commandes en cours -->
+        <!-- Current Orders -->
         <div class="form-section">
-          <h2>COMMANDES EN COURS</h2>
+          <h2>CURRENT ORDERS</h2>
           @if (currentOrders.length === 0) {
-          <p class="empty-message">Aucune commande en cours</p>
+          <p class="empty-message">No current orders</p>
           } @else {
           <div class="orders-list">
             @for (order of currentOrders; track order.id) {
             <div class="order-card">
               <div class="order-header">
-                <span class="order-number">Commande #{{ order.id }}</span>
-                <span class="order-date">{{ order.date | date:'dd/MM/yyyy' }}</span>
+                <span class="order-number">Order #{{ order.id }}</span>
+                <span class="order-date">{{ order.date | date:'MM/dd/yyyy' }}</span>
                 <span class="order-status">{{ order.status }}</span>
               </div>
               <div class="order-items">
@@ -130,14 +127,14 @@
                   <img [src]="item.image" [alt]="item.name" class="item-image">
                   <div class="item-details">
                     <h3>{{ item.name }}</h3>
-                    <p>{{ item.price | currency:'EUR' }}</p>
-                    <p>Quantité : {{ item.quantity }}</p>
+                    <p>{{ item.price | currency:'USD' }}</p>
+                    <p>Quantity: {{ item.quantity }}</p>
                   </div>
                 </div>
                 }
               </div>
               <div class="order-footer">
-                <span class="order-total">Total : {{ order.total | currency:'EUR' }}</span>
+                <span class="order-total">Total: {{ order.total | currency:'USD' }}</span>
               </div>
             </div>
             }
@@ -145,18 +142,18 @@
           }
         </div>
 
-        <!-- Historique des commandes -->
+        <!-- Order History -->
         <div class="form-section">
-          <h2>HISTORIQUE DES COMMANDES</h2>
+          <h2>ORDER HISTORY</h2>
           @if (orderHistory.length === 0) {
-          <p class="empty-message">Aucune commande passée</p>
+          <p class="empty-message">No past orders</p>
           } @else {
           <div class="orders-list">
             @for (order of orderHistory; track order.id) {
             <div class="order-card">
               <div class="order-header">
-                <span class="order-number">Commande #{{ order.id }}</span>
-                <span class="order-date">{{ order.date | date:'dd/MM/yyyy' }}</span>
+                <span class="order-number">Order #{{ order.id }}</span>
+                <span class="order-date">{{ order.date | date:'MM/dd/yyyy' }}</span>
                 <span class="order-status">{{ order.status }}</span>
               </div>
               <div class="order-items">
@@ -165,14 +162,14 @@
                   <img [src]="item.image" [alt]="item.name" class="item-image">
                   <div class="item-details">
                     <h3>{{ item.name }}</h3>
-                    <p>{{ item.price | currency:'EUR' }}</p>
-                    <p>Quantité : {{ item.quantity }}</p>
+                    <p>{{ item.price | currency:'USD' }}</p>
+                    <p>Quantity: {{ item.quantity }}</p>
                   </div>
                 </div>
                 }
               </div>
               <div class="order-footer">
-                <span class="order-total">Total : {{ order.total | currency:'EUR' }}</span>
+                <span class="order-total">Total: {{ order.total | currency:'USD' }}</span>
               </div>
             </div>
             }

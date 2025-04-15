@@ -13,11 +13,16 @@ export class CheckoutSummaryComponent {
   @Input() shipping: number = 0;
   @Input() vat: number = 0;
   @Input() grandTotal: number = 0;
+  @Input() formValid: boolean = false;
 
   @Output() onSubmit = new EventEmitter<void>();
 
   submitOrder(): void {
+    console.log('1. Bouton CONTINUE cliqué');
+    console.log('formValid:', this.formValid);
+    console.log('cartItems:', this.cartItems);
     this.onSubmit.emit();
+    console.log('2. Événement onSubmit émis');
   }
 
   // Obtenient l'URL de l'image du produit

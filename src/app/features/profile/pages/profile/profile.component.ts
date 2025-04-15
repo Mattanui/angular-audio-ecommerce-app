@@ -25,11 +25,11 @@ export class ProfileComponent implements OnInit {
   currentUser: User | null = null;
 
   constructor(
-    private fb: FormBuilder,
-    private userService: UserService,
-    private orderService: OrderService
+    private _fb: FormBuilder,
+    private _userService: UserService,
+    private _orderService: OrderService
   ) {
-    this.profileForm = this.fb.group({
+    this.profileForm = this._fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
       confirmPassword: [''],
     });
 
-    this.passwordForm = this.fb.group(
+    this.passwordForm = this._fb.group(
       {
         currentPassword: ['', Validators.required],
         newPassword: ['', [Validators.required, Validators.minLength(8)]],
@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit {
 
   loadUserData(): void {
     this.loading = true;
-    // Simuler la récupération des données utilisateur
+    // ?Simuler la récupération des données utilisateur
     of({
       id: '1',
       email: 'user@example.com',
@@ -76,25 +76,25 @@ export class ProfileComponent implements OnInit {
   loadOrders(): void {
     this.loading = true;
     this.error = ''; // Réinitialiser les erreurs
-    const userId = 1; // À remplacer par l'ID de l'utilisateur connecté
+    const userId = 1; // TODO: À remplacer par l'ID de l'utilisateur connecté
 
-    this.orderService.getCurrentOrders(userId).subscribe({
+    this._orderService.getCurrentOrders(userId).subscribe({
       next: (orders: Order[]) => {
         this.currentOrders = orders;
         this.loading = false;
       },
       error: (err: Error) => {
-        this.error = 'Erreur lors du chargement des commandes en cours';
+        this.error = 'Error loading current orders';
         this.loading = false;
       },
     });
 
-    this.orderService.getOrderHistory(userId).subscribe({
+    this._orderService.getOrderHistory(userId).subscribe({
       next: (orders: Order[]) => {
         this.orderHistory = orders;
       },
       error: (err: Error) => {
-        this.error = "Erreur lors du chargement de l'historique des commandes";
+        this.error = 'Error loading order history';
         this.loading = false;
       },
     });
@@ -114,13 +114,13 @@ export class ProfileComponent implements OnInit {
         ...this.profileForm.value,
       };
 
-      this.userService.updateUser(updatedUser).subscribe({
+      this._userService.updateUser(updatedUser).subscribe({
         next: () => {
-          this.success = 'Profil mis à jour avec succès';
+          this.success = 'Profile updated successfully';
           this.loading = false;
         },
         error: (err: Error) => {
-          this.error = 'Erreur lors de la mise à jour du profil';
+          this.error = 'Error updating profile';
           this.loading = false;
         },
       });
@@ -131,14 +131,14 @@ export class ProfileComponent implements OnInit {
     if (this.passwordForm.valid) {
       this.loading = true;
       const { currentPassword, newPassword } = this.passwordForm.value;
-      this.userService.updatePassword(currentPassword, newPassword).subscribe({
+      this._userService.updatePassword(currentPassword, newPassword).subscribe({
         next: () => {
-          this.success = 'Mot de passe mis à jour avec succès';
+          this.success = 'Password updated successfully';
           this.passwordForm.reset();
           this.loading = false;
         },
         error: (err: Error) => {
-          this.error = 'Erreur lors de la mise à jour du mot de passe';
+          this.error = 'Error updating password';
           this.loading = false;
         },
       });

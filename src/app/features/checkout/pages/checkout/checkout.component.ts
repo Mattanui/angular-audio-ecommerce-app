@@ -7,6 +7,9 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CartService, CartItem } from '../../../../core/services/cart.service';
+import { OrderService } from '../../../../core/services/order.service';
+import { UserService } from '../../../../core/services/user.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-checkout',
@@ -23,10 +26,13 @@ export class CheckoutComponent implements OnInit {
   grandTotal = 0;
   selectedPaymentMethod: string = 'cash';
   showEMoneyDetails: boolean = false;
+  loading = false;
 
   constructor(
     private _fb: FormBuilder,
     private _cartService: CartService,
+    private _orderService: OrderService,
+    private _userService: UserService,
     private _router: Router
   ) {}
 
@@ -84,6 +90,33 @@ export class CheckoutComponent implements OnInit {
       emoneyNumber: [''],
       emoneyPin: [''],
     });
+
+    // Pre-fill form with user data if available
+    this._userService
+      .getCurrentUser()
+      .pipe(take(1))
+      .subscribe((user) => {
+        if (user) {
+          this.checkoutForm.patchValue({
+            name: `${user.firstName} ${user.lastName}`,
+            email: user.email,
+          });
+
+          // Marquer les champs pré-remplis comme touchés
+          const nameControl = this.checkoutForm.get('name');
+          const emailControl = this.checkoutForm.get('email');
+
+          if (nameControl) {
+            nameControl.markAsTouched();
+            nameControl.updateValueAndValidity();
+          }
+
+          if (emailControl) {
+            emailControl.markAsTouched();
+            emailControl.updateValueAndValidity();
+          }
+        }
+      });
   }
 
   private _loadCartData(): void {
@@ -100,31 +133,75 @@ export class CheckoutComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.checkoutForm.valid) {
-      console.log('Formulaire valide', this.checkoutForm.value);
+    console.log('3. Méthode onSubmit appelée dans CheckoutComponent');
+    console.log('Form valide:', this.checkoutForm.valid);
+    console.log('Form values:', this.checkoutForm.value);
+    console.log('Form errors:', this.checkoutForm.errors);
 
-      // Prépare les données de commande pour la page de confirmation
+    if (this.checkoutForm.valid) {
+      this.loading = true;
+      console.log('4. Formulaire valide, préparation de la commande');
+
       const orderData = {
-        formData: this.checkoutForm.value,
-        cartItems: this.cartItems,
+        userId: 1, // TODO: Get from UserService
+        items: this.cartItems.map((item) => ({
+          productId: item.product.id,
+          quantity: item.quantity,
+          price: item.product.price,
+        })),
+        shipping: {
+          name: this.checkoutForm.get('name')?.value,
+          email: this.checkoutForm.get('email')?.value,
+          phone: this.checkoutForm.get('phone')?.value,
+          address: this.checkoutForm.get('address')?.value,
+          zipCode: this.checkoutForm.get('zipCode')?.value,
+          city: this.checkoutForm.get('city')?.value,
+          country: this.checkoutForm.get('country')?.value,
+        },
+        payment: {
+          method: this.checkoutForm.get('paymentMethod')?.value,
+          emoneyNumber: this.checkoutForm.get('emoneyNumber')?.value,
+          emoneyPin: this.checkoutForm.get('emoneyPin')?.value,
+        },
         total: this.total,
-        shipping: this.shipping,
+        shipping_fee: this.shipping,
         vat: this.vat,
         grandTotal: this.grandTotal,
+        status: 'pending',
+        date: new Date().toISOString(),
       };
 
-      // Stocke les données de commande temporairement (ex: localStorage)
-      localStorage.setItem('orderData', JSON.stringify(orderData));
+      console.log('5. Données de la commande:', orderData);
 
-      // Vide le panier
-      this._cartService.clearCart();
-
-      // Redirige vers la page de confirmation
-      this._router.navigate(['/checkout/confirmation']);
+      this._orderService.createOrder(orderData).subscribe({
+        next: (order) => {
+          console.log('6. Commande créée avec succès:', order);
+          localStorage.setItem('lastOrder', JSON.stringify(order));
+          this._cartService.clearCart();
+          this._router.navigate(['/checkout/confirmation']);
+        },
+        error: (error) => {
+          console.error('7. Erreur lors de la création de la commande:', error);
+          this.loading = false;
+        },
+      });
     } else {
-      // Marque tous les champs comme touchés pour afficher les erreurs
+      console.log('8. Formulaire invalide, affichage des erreurs');
+      console.log('Erreurs détaillées:', this.getFormValidationErrors());
       this._markFormGroupTouched(this.checkoutForm);
     }
+  }
+
+  // Nouvelle méthode pour obtenir les erreurs détaillées
+  private getFormValidationErrors(): any {
+    const errors: any = {};
+    Object.keys(this.checkoutForm.controls).forEach((key) => {
+      const control = this.checkoutForm.get(key);
+      if (control?.errors) {
+        errors[key] = control.errors;
+      }
+    });
+    return errors;
   }
 
   // Méthode utilitaire pour marquer tous les champs comme touchés
