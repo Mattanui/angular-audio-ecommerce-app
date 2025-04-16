@@ -26,14 +26,17 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
     this._route.params.subscribe((params) => {
       const slug = params['slug'];
-      this.loadProduct(slug);
+      const category = params['category'];
+      this.loadProduct(slug, category);
     });
   }
 
-  loadProduct(slug: string): void {
+  loadProduct(slug: string, category: string): void {
     this.loading = true;
     this._productService.getProductBySlug(slug).subscribe({
       next: (product) => {
+        // Ne pas rediriger si la catégorie ne correspond pas
+        // car cela peut arriver avec les produits suggérés
         this.product = product;
         this.loading = false;
 
@@ -50,6 +53,12 @@ export class ProductDetailComponent implements OnInit {
         this._router.navigate(['/']);
       },
     });
+  }
+
+  navigateToProduct(slug: string): void {
+    if (this.product) {
+      this._router.navigate(['/products', this.product.category, slug]);
+    }
   }
 
   loadRelatedProducts(slugs: string[]): void {

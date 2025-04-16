@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import {
   CategoryService,
   Category,
-} from '../../../../core/services/catagory.service';
+} from '../../../../core/services/category.service';
 
 @Component({
   selector: 'app-category-list',

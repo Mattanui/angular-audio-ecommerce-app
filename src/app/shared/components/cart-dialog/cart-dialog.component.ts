@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CartService, CartItem } from '../../../core/services/cart.service';
 import { Product } from '../../../models/product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart-dialog',
@@ -12,7 +13,7 @@ export class CartDialogComponent implements OnInit {
   cartItems: CartItem[] = [];
   total = 0;
 
-  constructor(private _cartService: CartService) {}
+  constructor(private _cartService: CartService, private _router: Router) {}
 
   ngOnInit(): void {
     this._cartService.getCart().subscribe((items) => {
@@ -42,9 +43,8 @@ export class CartDialogComponent implements OnInit {
   }
 
   checkout(): void {
-    // TODO: Rediriger vers la page de paiement
-    console.log('Redirection vers le checkout');
     this.closeDialog();
+    this._router.navigate(['/checkout']);
   }
 
   // Obtenient l'URL de l'image du produit
