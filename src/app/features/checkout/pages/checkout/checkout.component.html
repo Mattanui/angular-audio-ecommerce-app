@@ -4,7 +4,7 @@
 
     <div class="checkout-container">
       <!-- Formulaire principal -->
-      <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="checkout-form">
+      <form [formGroup]="checkoutForm" class="checkout-form">
         <h1>CHECKOUT</h1>
 
         <!-- BILLING DETAILS -->
@@ -159,3 +159,5 @@
     </div>
   </div>
 </div>
+
+<app-order-confirmation></app-order-confirmation>

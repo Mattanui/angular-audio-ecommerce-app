@@ -7,17 +7,14 @@ import { SharedModule } from '../../shared/shared.module';
 import { DesignSystemModule } from '../../design-system/design-system.module';
 
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { OrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
 import { CheckoutSummaryComponent } from './components/checkout-summary/checkout-summary.component';
-import { OrderConfirmationComponent } from './pages/order-confirmation/order-confirmation.component';
+import { OrderConfirmationModalService } from './services/order-confirmation-modal.service';
 
 const routes: Routes = [
   {
     path: '',
     component: CheckoutComponent,
-  },
-  {
-    path: 'confirmation',
-    component: OrderConfirmationComponent,
   },
 ];
 
@@ -34,5 +31,6 @@ const routes: Routes = [
     DesignSystemModule,
     RouterModule.forChild(routes),
   ],
+  providers: [OrderConfirmationModalService],
 })
 export class CheckoutModule {}

@@ -10,6 +10,7 @@ import { CartService, CartItem } from '../../../../core/services/cart.service';
 import { OrderService } from '../../../../core/services/order.service';
 import { UserService } from '../../../../core/services/user.service';
 import { take } from 'rxjs/operators';
+import { OrderConfirmationModalService } from '../../services/order-confirmation-modal.service';
 
 @Component({
   selector: 'app-checkout',
@@ -33,7 +34,8 @@ export class CheckoutComponent implements OnInit {
     private _cartService: CartService,
     private _orderService: OrderService,
     private _userService: UserService,
-    private _router: Router
+    private _router: Router,
+    private _modalService: OrderConfirmationModalService
   ) {}
 
   ngOnInit(): void {
@@ -143,32 +145,18 @@ export class CheckoutComponent implements OnInit {
       console.log('4. Formulaire valide, préparation de la commande');
 
       const orderData = {
-        userId: 1, // TODO: Get from UserService
+        ...this.checkoutForm.value,
         items: this.cartItems.map((item) => ({
-          productId: item.product.id,
-          quantity: item.quantity,
+          name: item.product.name,
           price: item.product.price,
+          quantity: item.quantity,
+          image: item.product.image.desktop,
+          productId: item.product.id,
         })),
-        shipping: {
-          name: this.checkoutForm.get('name')?.value,
-          email: this.checkoutForm.get('email')?.value,
-          phone: this.checkoutForm.get('phone')?.value,
-          address: this.checkoutForm.get('address')?.value,
-          zipCode: this.checkoutForm.get('zipCode')?.value,
-          city: this.checkoutForm.get('city')?.value,
-          country: this.checkoutForm.get('country')?.value,
-        },
-        payment: {
-          method: this.checkoutForm.get('paymentMethod')?.value,
-          emoneyNumber: this.checkoutForm.get('emoneyNumber')?.value,
-          emoneyPin: this.checkoutForm.get('emoneyPin')?.value,
-        },
-        total: this.total,
-        shipping_fee: this.shipping,
+        total: this.grandTotal,
+        shipping: this.shipping,
         vat: this.vat,
-        grandTotal: this.grandTotal,
-        status: 'pending',
-        date: new Date().toISOString(),
+        subtotal: this.total,
       };
 
       console.log('5. Données de la commande:', orderData);
@@ -176,9 +164,8 @@ export class CheckoutComponent implements OnInit {
       this._orderService.createOrder(orderData).subscribe({
         next: (order) => {
           console.log('6. Commande créée avec succès:', order);
-          localStorage.setItem('lastOrder', JSON.stringify(order));
-          this._cartService.clearCart();
-          this._router.navigate(['/checkout/confirmation']);
+          this._modalService.showModal(order);
+          this._cartService.clearCart(); // Vider le panier après la commande
         },
         error: (error) => {
           console.error('7. Erreur lors de la création de la commande:', error);

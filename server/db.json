@@ -523,204 +523,44 @@
   ],
   "orders": [
     {
-      "id": "02f8",
-      "userId": 1,
+      "id": "a1a8",
+      "name": "Alexei Ward",
+      "email": "alexei@gmail.com",
+      "phone": "+1 (202) 55-01136",
+      "address": "1137 Williams Avenue",
+      "zipCode": "10001",
+      "city": "New York",
+      "country": "United States",
+      "paymentMethod": "cash",
+      "emoneyNumber": "",
+      "emoneyPin": "",
       "items": [
         {
-          "productId": "4",
+          "name": "XX99 Mark II Headphones",
+          "price": 2999,
           "quantity": 1,
-          "price": 2999
+          "image": "/assets/images/product-xx99-mark-two-headphones/desktop/image-product.jpg",
+          "productId": "4"
         },
         {
-          "productId": "6",
+          "name": "ZX9 Speaker",
+          "price": 4500,
           "quantity": 1,
-          "price": 4500
+          "image": "/assets/images/product-zx9-speaker/desktop/image-product.jpg",
+          "productId": "6"
         },
         {
-          "productId": "1",
+          "name": "YX1 Wireless Earphones",
+          "price": 599,
           "quantity": 1,
-          "price": 599
+          "image": "/assets/images/product-yx1-earphones/desktop/image-product.jpg",
+          "productId": "1"
         }
       ],
-      "shipping": {
-        "name": "John Doe",
-        "email": "demo@example.com",
-        "phone": "+1 (202) 55-01136",
-        "address": "1137 Williams Avenue",
-        "zipCode": "10001",
-        "city": "New York",
-        "country": "United States"
-      },
-      "payment": {
-        "method": "cash",
-        "emoneyNumber": "",
-        "emoneyPin": ""
-      },
-      "total": 8098,
-      "shipping_fee": 50,
+      "total": 8148,
+      "shipping": 50,
       "vat": 1620,
-      "grandTotal": 8148,
-      "status": "pending",
-      "date": "2025-04-14T18:45:59.409Z"
-    },
-    {
-      "id": "5ffe",
-      "userId": 1,
-      "items": [
-        {
-          "productId": "4",
-          "quantity": 1,
-          "price": 2999
-        },
-        {
-          "productId": "6",
-          "quantity": 1,
-          "price": 4500
-        },
-        {
-          "productId": "1",
-          "quantity": 1,
-          "price": 599
-        }
-      ],
-      "shipping": {
-        "name": "John Doe",
-        "email": "demo@example.com",
-        "phone": "+1 (202) 55-01136",
-        "address": "1137 Williams Avenue",
-        "zipCode": "10001",
-        "city": "New York",
-        "country": "United States"
-      },
-      "payment": {
-        "method": "cash",
-        "emoneyNumber": "",
-        "emoneyPin": ""
-      },
-      "total": 8098,
-      "shipping_fee": 50,
-      "vat": 1620,
-      "grandTotal": 8148,
-      "status": "pending",
-      "date": "2025-04-14T19:11:32.704Z"
-    },
-    {
-      "id": "a93c",
-      "userId": 1,
-      "items": [
-        {
-          "productId": "1",
-          "quantity": 1,
-          "price": 599
-        },
-        {
-          "productId": "4",
-          "quantity": 1,
-          "price": 2999
-        },
-        {
-          "productId": "6",
-          "quantity": 1,
-          "price": 4500
-        }
-      ],
-      "shipping": {
-        "name": "John Doe",
-        "email": "demo@example.com",
-        "phone": "+1 (202) 55-01136",
-        "address": "1137 Williams Avenue",
-        "zipCode": "10001",
-        "city": "New York",
-        "country": "United States"
-      },
-      "payment": {
-        "method": "cash",
-        "emoneyNumber": "",
-        "emoneyPin": ""
-      },
-      "total": 8098,
-      "shipping_fee": 50,
-      "vat": 1620,
-      "grandTotal": 8148,
-      "status": "pending",
-      "date": "2025-04-15T09:54:12.082Z"
-    },
-    {
-      "id": "0c11",
-      "userId": 1,
-      "items": [
-        {
-          "productId": "1",
-          "quantity": 2,
-          "price": 599
-        },
-        {
-          "productId": "6",
-          "quantity": 1,
-          "price": 4500
-        }
-      ],
-      "shipping": {
-        "name": "John Doe",
-        "email": "demo@example.com",
-        "phone": "+1 (202) 55-01136",
-        "address": "1137 Williams Avenue",
-        "zipCode": "10001",
-        "city": "New York",
-        "country": "United States"
-      },
-      "payment": {
-        "method": "cash",
-        "emoneyNumber": "",
-        "emoneyPin": ""
-      },
-      "total": 5698,
-      "shipping_fee": 50,
-      "vat": 1140,
-      "grandTotal": 5748,
-      "status": "pending",
-      "date": "2025-04-15T10:41:11.758Z"
-    },
-    {
-      "id": "d3a1",
-      "userId": 1,
-      "items": [
-        {
-          "productId": "4",
-          "quantity": 1,
-          "price": 2999
-        },
-        {
-          "productId": "6",
-          "quantity": 1,
-          "price": 4500
-        },
-        {
-          "productId": "1",
-          "quantity": 1,
-          "price": 599
-        }
-      ],
-      "shipping": {
-        "name": "John Doe",
-        "email": "demo@example.com",
-        "phone": "+1 (202) 55-01136",
-        "address": "1137 Williams Avenue",
-        "zipCode": "10001",
-        "city": "New York",
-        "country": "United States"
-      },
-      "payment": {
-        "method": "cash",
-        "emoneyNumber": "",
-        "emoneyPin": ""
-      },
-      "total": 8098,
-      "shipping_fee": 50,
-      "vat": 1620,
-      "grandTotal": 8148,
-      "status": "pending",
-      "date": "2025-04-15T12:01:44.977Z"
+      "subtotal": 8098
     }
   ]
 }
